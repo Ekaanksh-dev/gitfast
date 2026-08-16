@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="gitfast",
+    name="gitblaze",
     version="1.0.0",
     description="42 git shortcuts + auto merge conflict resolver — zero AI, pure Python",
     long_description=open("README.md").read(),

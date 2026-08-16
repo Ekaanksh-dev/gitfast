@@ -1,10 +1,10 @@
-# gitfast
+# gitblaze
 
 42 git shortcuts + auto merge conflict resolver — zero AI, pure Python
 
 ```bash
-pip install gitfast
-gitfast install
+pip install gitblaze
+gitblaze install
 ghelp
 ```
 
@@ -30,10 +30,10 @@ gcp "fix login bug"
 
 ```bash
 # install
-pip install gitfast
+pip install gitblaze
 
 # setup
-gitfast install
+gitblaze install
 
 # reload your shell
 source ~/.bashrc          # bash
@@ -194,8 +194,8 @@ Token is never stored in plain text. Never in .bashrc. Never logged.
 ## Uninstall
 
 ```bash
-gitfast uninstall
-pip uninstall gitfast
+gitblaze uninstall
+pip uninstall gitblaze
 ```
 
 ---
@@ -203,7 +203,7 @@ pip uninstall gitfast
 ## Update
 
 ```bash
-gitfast update
+gitblaze update
 ```
 
 ---
@@ -217,4 +217,4 @@ MIT — see LICENSE file
 ## Author
 
 Built for developers who live in the terminal.
-# gitfast — 42 git shortcuts
+# gitblaze — 42 git shortcuts

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "gitblaze"
-version = "1.0.0"
+version = "1.0.1"
 description = "42 git shortcuts + auto merge conflict resolver — zero AI, pure Python"
 readme = "README.md"
 license = { file = "LICENSE" }
@@ -33,9 +33,9 @@ classifiers = [
 ]
 
 [project.scripts]
-gitfast = "gitfast.cli:main"
-ghelp   = "gitfast.cli:help_cmd"
-gmerge  = "gitfast.merge.resolver:main"
+gitblaze = "gitfast.cli:main"
+ghelp    = "gitfast.cli:help_cmd"
+gmerge   = "gitfast.merge.resolver:main"
 
 [project.urls]
 Homepage = "https://github.com/Ekaanksh-dev/gitfast"

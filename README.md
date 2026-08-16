@@ -217,3 +217,4 @@ MIT — see LICENSE file
 ## Author
 
 Built for developers who live in the terminal.
+# gitfast — 42 git shortcuts

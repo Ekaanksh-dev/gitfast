@@ -1,13 +1,22 @@
-# Changelog
+## [1.0.2] - 2026
 
-All notable changes to gitfast are documented here.
+### Fixed
+- Corrected entry points to gitfast module
+- Fixed package discovery in pyproject.toml
+- Updated README to use gitblaze name
 
 ---
 
-## [1.0.0] - 2024
+## [1.0.1] - 2026
+
+### Fixed
+- Bumped version for PyPI republish
+
+---
+
+## [1.0.0] - 2026
 
 ### Added
-
 - TIER 1 shortcuts — gs, gc, gcp, gpl
 - TIER 2 shortcuts — gb, gnb, gsw, gm, gl, gll, gd, gdf, gcl
 - TIER 3 shortcuts — gundo, gundo2, gsave, gpop, gstashes,
@@ -16,25 +25,12 @@ All notable changes to gitfast are documented here.
                      gshow, gclean, gremotes
 - Auto merge conflict resolver — gmerge
 - Interactive conflict resolver — gmerge -i
-- Conflict strategies — smart, ours, theirs, longer
-- Conflict backup system — auto backup before resolving
-- Auto push error resolver — fixes rejected push automatically
+- Auto push error resolver
 - Token manager — gtoken setup/test/refresh/revoke/info
 - SSH setup — gsetup_ssh
-- Credential helper — gsetup_creds
-- HTTPS to SSH converter — ghttps_to_ssh
+- Platform setup wizard — gsetup
 - Shell support — bash, zsh, fish, powershell
-- OS support — Ubuntu, Arch, Fedora, macOS, WSL2, Git Bash, Windows
-- Auto OS detection
-- Auto shell detection
-- Secure token storage — Keychain, GNOME Keyring, Windows Credential Manager
-- Token expiry checker — warns 14 days before expiry
-- Auto updater — gitfast update
-- Clean uninstaller — gitfast uninstall
-
-### Technical
-
-- Zero external dependencies — pure Python stdlib only
-- Works on Python 3.7+
-- Works on any OS with netrc fallback
+- OS support — Ubuntu, Arch, Fedora, macOS, WSL2, Windows
+- Zero external dependencies — pure Python stdlib
+- 61 tests passing
 - MIT License

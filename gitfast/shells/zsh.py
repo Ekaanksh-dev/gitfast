@@ -14,6 +14,15 @@ _gf_repo()   { git rev-parse --is-inside-work-tree &>/dev/null }
 # TIER 1 — daily
 gs()  { _gf_repo && git status -s }
 gpl() { _gf_repo && git pull origin $(_gf_branch) }
+gc()  {
+    param([string]$msg)
+    if (-not $msg) { Write-Host "[ERROR] Usage: gc <message>"; return }
+    Write-Host "[..] Staging..."
+    git add .
+    Write-Host "[..] Committing..."
+    git commit -m $msg
+    Write-Host "[OK] Committed locally — run gcp to push"
+}
 gcp() {
     _gf_repo || return
     local msg="${*}"

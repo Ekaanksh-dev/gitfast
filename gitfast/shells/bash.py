@@ -15,10 +15,13 @@ _gf_repo() { git rev-parse --is-inside-work-tree &>/dev/null; }
 gs()   { _gf_repo && git status -s; }
 gpl()  { _gf_repo && git pull origin $(_gf_branch); }
 gc() {
-    _gf_repo || return
-    [[ -z "$1" ]] && echo "[ERROR] Usage: gc <message>" && return 1
-    echo "[..] Staging..."    && git add .
-    echo "[..] Committing..." && git commit -m "$1"
+    _gf_repo || { echo "[ERROR] Not a git repo"; return 1; }
+    local msg="${*}"
+    [[ -z "$msg" ]] && echo "[ERROR] Usage: gc <message>" && return 1
+    echo "[..] Staging..."
+    git add .
+    echo "[..] Committing..."
+    git commit -m "$msg"
     echo "[OK] Committed locally — run gcp to push"
 }
 gcp() {

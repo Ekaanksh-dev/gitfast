@@ -10,16 +10,16 @@ ghelp
 
 ---
 
-## Why gitfast?
+## Why gitshorts?
 
-Before gitfast — 3 commands every commit:
+Before gitshorts — 3 commands every commit:
 ```bash
 git add .
 git commit -m "fix login bug"
 git push origin main
 ```
 
-After gitfast — 1 command:
+After gitshorts — 1 command:
 ```bash
 gcp "fix login bug"
 ```

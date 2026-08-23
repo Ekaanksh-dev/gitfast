@@ -3,7 +3,7 @@ import pytest
 
 def test_version():
     from gitfast import __version__
-    assert __version__ == "1.0.0"
+    assert __version__ == "1.0.4"
 
 
 def test_banner():

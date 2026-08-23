@@ -27,11 +27,11 @@ def test_bash_install_uninstall():
     assert result == True
     with open(tmp, "r") as f:
         content = f.read()
-    assert "gitfast shortcuts" in content
+    assert "gitshorts shortcuts" in content
     uninstall(tmp)
     with open(tmp, "r") as f:
         content = f.read()
-    assert "gitfast shortcuts" not in content
+    assert "gitshorts shortcuts" not in content
     os.unlink(tmp)
 
 
@@ -67,7 +67,7 @@ def test_fish_install_uninstall():
     uninstall(tmp)
     with open(tmp, "r") as f:
         content = f.read()
-    assert "gitfast shortcuts" not in content
+    assert "gitshorts shortcuts" not in content
     os.unlink(tmp)
 
 
@@ -86,5 +86,5 @@ def test_zsh_install_uninstall():
     uninstall(tmp)
     with open(tmp, "r") as f:
         content = f.read()
-    assert "gitfast shortcuts" not in content
+    assert "gitshorts shortcuts" not in content
     os.unlink(tmp)

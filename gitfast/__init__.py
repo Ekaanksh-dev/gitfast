@@ -1,4 +1,4 @@
-__version__ = "1.0.2"
+__version__ = "1.0.4"
 __author__  = "Ekaanksh Patil"
 __email__   = "pekanksh@email.com"
 __license__ = "MIT"
@@ -9,7 +9,7 @@ from gitfast.utils.colors import Colors
 def banner():
     print(f"""
 {Colors.BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━{Colors.RESET}
-{Colors.YELLOW}  ⚡ gitfast v{__version__}{Colors.RESET}
+{Colors.YELLOW}  ⚡ gitshorts v{__version__}{Colors.RESET}
 {Colors.GRAY}  42 git shortcuts. Zero friction.{Colors.RESET}
 {Colors.BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━{Colors.RESET}
 """)

@@ -3,7 +3,7 @@
 ### Fixed
 - Corrected entry points to gitfast module
 - Fixed package discovery in pyproject.toml
-- Updated README to use gitblaze name
+- Updated README to use gitshorts name
 
 ---
 

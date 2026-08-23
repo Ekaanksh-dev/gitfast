@@ -1,10 +1,10 @@
-# gitblaze
+# gitshorts
 
 42 git shortcuts + auto merge conflict resolver — zero AI, pure Python
 
 ```bash
-pip install gitblaze
-gitblaze install
+pip install gitshorts
+gitshorts install
 ghelp
 ```
 
@@ -30,10 +30,10 @@ gcp "fix login bug"
 
 ```bash
 # install
-pip install gitblaze
+pip install gitshorts
 
 # setup
-gitblaze install
+gitshorts install
 
 # reload your shell
 source ~/.bashrc          # bash
@@ -194,8 +194,8 @@ Token is never stored in plain text. Never in .bashrc. Never logged.
 ## Uninstall
 
 ```bash
-gitblaze uninstall
-pip uninstall gitblaze
+gitshorts uninstall
+pip uninstall gitshorts
 ```
 
 ---
@@ -203,7 +203,7 @@ pip uninstall gitblaze
 ## Update
 
 ```bash
-gitblaze update
+gitshorts update
 ```
 
 ---
@@ -217,4 +217,4 @@ MIT — see LICENSE file
 ## Author
 
 Built for developers who live in the terminal.
-# gitblaze — 42 git shortcuts
+# gitshorts — 42 git shortcuts

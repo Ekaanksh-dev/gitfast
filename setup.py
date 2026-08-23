@@ -1,8 +1,8 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="gitblaze",
-    version="1.0.2",
+    name="gitshorts",
+    version="1.0.4",
     description="42 git shortcuts + auto merge conflict resolver — zero AI, pure Python",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
@@ -15,7 +15,7 @@ setup(
     install_requires=[],
     entry_points={
         "console_scripts": [
-            "gitblaze=gitfast.cli:main",
+            "gitshorts=gitfast.cli:main",
             "ghelp=gitfast.cli:help_cmd",
             "gmerge=gitfast.merge.resolver:main",
         ],

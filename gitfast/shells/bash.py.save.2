@@ -265,14 +265,14 @@ def uninstall(config_path):
         with open(config_path, "r") as f:
             content = f.read()
 
-        start = content.find("# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n# gitshorts shortcuts")
-        end   = content.find("# end gitshorts\n# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+        
+        end   = content.find("# end gitfast\n# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
 
         if start == -1 or end == -1:
             Printer.warning("gitshorts block not found in bashrc")
             return False
 
-        cleaned = content[:start] + content[end + len("# end gitshorts\n# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"):]
+        cleaned = content[:start] + content[end + len("# end gitfast\n# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"):]
 
         with open(config_path, "w") as f:
             f.write(cleaned)

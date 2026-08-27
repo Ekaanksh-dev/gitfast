@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "gitshorts"
-version = "1.0.4"
+version = "1.0.5"
 description = "42 git shortcuts + auto merge conflict resolver — zero AI, pure Python"
 readme = "README.md"
 license = { file = "LICENSE" }
@@ -43,4 +43,4 @@ Issues   = "https://github.com/Ekaanksh-dev/gitfast/issues"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["gitfast*"]
+include = ["gitshorts*"]

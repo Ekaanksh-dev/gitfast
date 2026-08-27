@@ -39,7 +39,7 @@ def make_conflict_file(content):
 # ─────────────────────────────────────────
 
 def test_parse_no_conflicts():
-    from gitfast.merge.parser import parse_conflicts
+    from gitshorts.merge.parser import parse_conflicts
     with tempfile.NamedTemporaryFile(
         mode="w", suffix=".py", delete=False
     ) as f:
@@ -51,7 +51,7 @@ def test_parse_no_conflicts():
 
 
 def test_parse_one_conflict():
-    from gitfast.merge.parser import parse_conflicts
+    from gitshorts.merge.parser import parse_conflicts
     path = make_conflict_file(CONFLICT_CONTENT)
     conflicts = parse_conflicts(path)
     assert len(conflicts) == 1
@@ -61,7 +61,7 @@ def test_parse_one_conflict():
 
 
 def test_parse_two_conflicts():
-    from gitfast.merge.parser import parse_conflicts
+    from gitshorts.merge.parser import parse_conflicts
     path = make_conflict_file(TWO_CONFLICTS)
     conflicts = parse_conflicts(path)
     assert len(conflicts) == 2
@@ -69,7 +69,7 @@ def test_parse_two_conflicts():
 
 
 def test_count_conflicts():
-    from gitfast.merge.parser import count_conflicts
+    from gitshorts.merge.parser import count_conflicts
     path = make_conflict_file(TWO_CONFLICTS)
     count = count_conflicts(path)
     assert count == 2
@@ -77,14 +77,14 @@ def test_count_conflicts():
 
 
 def test_has_conflicts_true():
-    from gitfast.merge.parser import has_conflicts
+    from gitshorts.merge.parser import has_conflicts
     path = make_conflict_file(CONFLICT_CONTENT)
     assert has_conflicts(path) == True
     os.unlink(path)
 
 
 def test_has_conflicts_false():
-    from gitfast.merge.parser import has_conflicts
+    from gitshorts.merge.parser import has_conflicts
     with tempfile.NamedTemporaryFile(
         mode="w", suffix=".py", delete=False
     ) as f:
@@ -99,8 +99,8 @@ def test_has_conflicts_false():
 # ─────────────────────────────────────────
 
 def test_strategy_ours():
-    from gitfast.merge.parser import parse_conflicts
-    from gitfast.merge.strategies import resolve_ours
+    from gitshorts.merge.parser import parse_conflicts
+    from gitshorts.merge.strategies import resolve_ours
     path = make_conflict_file(CONFLICT_CONTENT)
     conflicts = parse_conflicts(path)
     result = resolve_ours(conflicts[0])
@@ -109,8 +109,8 @@ def test_strategy_ours():
 
 
 def test_strategy_theirs():
-    from gitfast.merge.parser import parse_conflicts
-    from gitfast.merge.strategies import resolve_theirs
+    from gitshorts.merge.parser import parse_conflicts
+    from gitshorts.merge.strategies import resolve_theirs
     path = make_conflict_file(CONFLICT_CONTENT)
     conflicts = parse_conflicts(path)
     result = resolve_theirs(conflicts[0])
@@ -119,8 +119,8 @@ def test_strategy_theirs():
 
 
 def test_strategy_longer():
-    from gitfast.merge.parser import Conflict
-    from gitfast.merge.strategies import resolve_longer
+    from gitshorts.merge.parser import Conflict
+    from gitshorts.merge.strategies import resolve_longer
     conflict = Conflict(
         ours="line1\nline2\nline3",
         theirs="line1",
@@ -133,8 +133,8 @@ def test_strategy_longer():
 
 
 def test_strategy_smart_empty_ours():
-    from gitfast.merge.parser import Conflict
-    from gitfast.merge.strategies import resolve_smart
+    from gitshorts.merge.parser import Conflict
+    from gitshorts.merge.strategies import resolve_smart
     conflict = Conflict(
         ours="",
         theirs="their code here",
@@ -147,8 +147,8 @@ def test_strategy_smart_empty_ours():
 
 
 def test_strategy_smart_empty_theirs():
-    from gitfast.merge.parser import Conflict
-    from gitfast.merge.strategies import resolve_smart
+    from gitshorts.merge.parser import Conflict
+    from gitshorts.merge.strategies import resolve_smart
     conflict = Conflict(
         ours="our code here",
         theirs="",
@@ -161,8 +161,8 @@ def test_strategy_smart_empty_theirs():
 
 
 def test_strategy_smart_equal():
-    from gitfast.merge.parser import Conflict
-    from gitfast.merge.strategies import resolve_smart
+    from gitshorts.merge.parser import Conflict
+    from gitshorts.merge.strategies import resolve_smart
     conflict = Conflict(
         ours="same code",
         theirs="same code",
@@ -175,8 +175,8 @@ def test_strategy_smart_equal():
 
 
 def test_apply_strategy_all():
-    from gitfast.merge.parser import parse_conflicts
-    from gitfast.merge.strategies import apply_strategy_to_all, Strategy
+    from gitshorts.merge.parser import parse_conflicts
+    from gitshorts.merge.strategies import apply_strategy_to_all, Strategy
     path = make_conflict_file(TWO_CONFLICTS)
     conflicts = parse_conflicts(path)
     resolved = apply_strategy_to_all(conflicts, Strategy.OURS)
@@ -189,7 +189,7 @@ def test_apply_strategy_all():
 # ─────────────────────────────────────────
 
 def test_backup_create():
-    from gitfast.merge.backup import create_backup, delete_backup
+    from gitshorts.merge.backup import create_backup, delete_backup
     with tempfile.NamedTemporaryFile(
         mode="w", suffix=".py", delete=False
     ) as f:
@@ -204,7 +204,7 @@ def test_backup_create():
 
 
 def test_backup_restore():
-    from gitfast.merge.backup import create_backup, restore_backup
+    from gitshorts.merge.backup import create_backup, restore_backup
     with tempfile.NamedTemporaryFile(
         mode="w", suffix=".py", delete=False
     ) as f:
@@ -221,7 +221,7 @@ def test_backup_restore():
 
 
 def test_list_backups_empty():
-    from gitfast.merge.backup import list_backups
+    from gitshorts.merge.backup import list_backups
     tmp = tempfile.mkdtemp()
     backups = list_backups(tmp)
     assert backups == []

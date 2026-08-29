@@ -19,21 +19,30 @@ def test_bash_shortcuts_contains_gtoken():
 
 
 def test_bash_install_uninstall():
-    from gitshorts.shells.bash import install, uninstall
+    from gitshorts.shells.bash import install, uninstall, INIT_FILE
     tmp = tempfile.mktemp(suffix=".bashrc")
     with open(tmp, "w") as f:
         f.write("# existing config\n")
+
     result = install(tmp)
     assert result == True
+
+    # shortcuts go to init file not bashrc
+    with open(INIT_FILE, "r") as f:
+        init_content = f.read()
+    assert "gitshorts shortcuts" in init_content
+
+    # bashrc only has source line
     with open(tmp, "r") as f:
-        content = f.read()
-    assert "gitshorts shortcuts" in content
+        bashrc_content = f.read()
+    assert "gitshorts" in bashrc_content
+    assert "source" in bashrc_content
+
     uninstall(tmp)
     with open(tmp, "r") as f:
         content = f.read()
-    assert "gitshorts shortcuts" not in content
+    assert "gitshorts" not in content
     os.unlink(tmp)
-
 
 def test_bash_install_skips_duplicate():
     from gitshorts.shells.bash import install

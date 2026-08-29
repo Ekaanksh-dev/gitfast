@@ -1,6 +1,10 @@
 import os
 from gitshorts.utils.colors import Printer
 
+GITSHORTS_DIR = os.path.expanduser("~/.gitshorts")
+INIT_FILE     = os.path.join(GITSHORTS_DIR, "init.sh")
+SOURCE_LINE   = '[ -f ~/.gitshorts/init.sh ] && source ~/.gitshorts/init.sh'
+
 
 ZSH_SHORTCUTS = '''
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -237,19 +241,33 @@ ghelp() {
 
 
 def install(config_path):
+    framework = _detect_framework(config_path)
+    if framework:
+        Printer.info(f"Detected: {framework} — using safe install")
+
+    os.makedirs(GITSHORTS_DIR, exist_ok=True)
+
+    try:
+        with open(INIT_FILE, "w") as f:
+            f.write(ZSH_SHORTCUTS)
+        Printer.success(f"Shortcuts written to {INIT_FILE}")
+    except Exception as e:
+        Printer.error(f"Failed to write {INIT_FILE}: {e}")
+        return False
+
     if os.path.exists(config_path):
         with open(config_path, "r") as f:
-            if "gitfast shortcuts" in f.read():
-                Printer.warning("gitfast already in zshrc — skipping")
+            if SOURCE_LINE in f.read():
+                Printer.warning("gitshorts already in config — skipping")
                 return True
 
     try:
         with open(config_path, "a") as f:
-            f.write(ZSH_SHORTCUTS)
-        Printer.success(f"Shortcuts added to {config_path}")
+            f.write(f"\n# gitshorts\n{SOURCE_LINE}\n")
+        Printer.success(f"Added source line to {config_path}")
         return True
     except Exception as e:
-        Printer.error(f"Failed to write to {config_path}: {e}")
+        Printer.error(f"Failed: {e}")
         return False
 
 
@@ -259,23 +277,54 @@ def uninstall(config_path):
 
     try:
         with open(config_path, "r") as f:
-            content = f.read()
+            lines = f.readlines()
 
-        start = content.find("# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n# gitfast shortcuts")
-        end   = content.find("# end gitfast\n# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
-
-        if start == -1 or end == -1:
-            Printer.warning("gitfast block not found in zshrc")
-            return False
-
-        cleaned = content[:start] + content[end + len("# end gitfast\n# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"):]
+        cleaned = [
+            l for l in lines
+            if "gitshorts" not in l
+            and SOURCE_LINE not in l
+        ]
 
         with open(config_path, "w") as f:
-            f.write(cleaned)
+            f.writelines(cleaned)
 
-        Printer.success("Removed from zshrc")
+        Printer.success(f"Removed source line from {config_path}")
+        _cleanup_init_if_unused()
         return True
 
     except Exception as e:
         Printer.error(f"Failed: {e}")
         return False
+
+
+def _detect_framework(config_path):
+    if not os.path.exists(config_path):
+        return None
+    try:
+        with open(config_path, "r") as f:
+            content = f.read()
+        if "oh-my-zsh" in content:  return "oh-my-zsh"
+        if "prezto"    in content:  return "prezto"
+        if "antigen"   in content:  return "antigen"
+        if "zinit"     in content:  return "zinit"
+        if "starship"  in content:  return "starship"
+    except Exception:
+        pass
+    return None
+
+
+def _cleanup_init_if_unused():
+    shell_configs = [
+        os.path.expanduser("~/.bashrc"),
+        os.path.expanduser("~/.zshrc"),
+        os.path.expanduser("~/.config/fish/config.fish"),
+    ]
+    for config in shell_configs:
+        if not os.path.exists(config):
+            continue
+        with open(config, "r") as f:
+            if "gitshorts" in f.read():
+                return
+    if os.path.exists(INIT_FILE):
+        os.remove(INIT_FILE)
+        Printer.success(f"Removed {INIT_FILE}")

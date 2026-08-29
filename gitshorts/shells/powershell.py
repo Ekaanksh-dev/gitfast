@@ -1,6 +1,10 @@
 import os
 from gitshorts.utils.colors import Printer
 
+GITSHORTS_DIR  = os.path.expanduser("~/.gitshorts")
+INIT_FILE_PS   = os.path.join(GITSHORTS_DIR, "init.ps1")
+SOURCE_LINE    = '. ~/.gitshorts/init.ps1'
+
 
 POWERSHELL_SHORTCUTS = '''
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -236,23 +240,31 @@ function ghelp {
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 '''
 
-
 def install(config_path):
+    os.makedirs(GITSHORTS_DIR, exist_ok=True)
     os.makedirs(os.path.dirname(config_path), exist_ok=True)
+
+    try:
+        with open(INIT_FILE_PS, "w") as f:
+            f.write(POWERSHELL_SHORTCUTS)
+        Printer.success(f"Shortcuts written to {INIT_FILE_PS}")
+    except Exception as e:
+        Printer.error(f"Failed: {e}")
+        return False
 
     if os.path.exists(config_path):
         with open(config_path, "r") as f:
-            if "gitfast shortcuts" in f.read():
-                Printer.warning("gitfast already in PowerShell profile — skipping")
+            if SOURCE_LINE in f.read():
+                Printer.warning("gitshorts already in config — skipping")
                 return True
 
     try:
         with open(config_path, "a") as f:
-            f.write(POWERSHELL_SHORTCUTS)
-        Printer.success(f"Shortcuts added to {config_path}")
+            f.write(f"\n# gitshorts\n{SOURCE_LINE}\n")
+        Printer.success(f"Added source line to {config_path}")
         return True
     except Exception as e:
-        Printer.error(f"Failed to write to {config_path}: {e}")
+        Printer.error(f"Failed: {e}")
         return False
 
 
@@ -262,21 +274,21 @@ def uninstall(config_path):
 
     try:
         with open(config_path, "r") as f:
-            content = f.read()
+            lines = f.readlines()
 
-        start = content.find("# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n# gitfast shortcuts")
-        end   = content.find("# end gitfast\n# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
-
-        if start == -1 or end == -1:
-            Printer.warning("gitfast block not found in PowerShell profile")
-            return False
-
-        cleaned = content[:start] + content[end + len("# end gitfast\n# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"):]
+        cleaned = [
+            l for l in lines
+            if "gitshorts" not in l
+            and SOURCE_LINE not in l
+        ]
 
         with open(config_path, "w") as f:
-            f.write(cleaned)
+            f.writelines(cleaned)
 
-        Printer.success("Removed from PowerShell profile")
+        if os.path.exists(INIT_FILE_PS):
+            os.remove(INIT_FILE_PS)
+
+        Printer.success(f"Removed from {config_path}")
         return True
 
     except Exception as e:

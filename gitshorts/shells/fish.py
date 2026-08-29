@@ -1,6 +1,10 @@
 import os
 from gitshorts.utils.colors import Printer
 
+GITSHORTS_DIR = os.path.expanduser("~/.gitshorts")
+INIT_FILE_FISH = os.path.join(GITSHORTS_DIR, "init.fish")
+SOURCE_LINE   = 'source ~/.gitshorts/init.fish'
+
 
 FISH_SHORTCUTS = '''
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -271,23 +275,35 @@ end
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 '''
 
-
 def install(config_path):
+    framework = _detect_framework(config_path)
+    if framework:
+        Printer.info(f"Detected: {framework} — using safe install")
+
+    os.makedirs(GITSHORTS_DIR, exist_ok=True)
     os.makedirs(os.path.dirname(config_path), exist_ok=True)
+
+    try:
+        with open(INIT_FILE_FISH, "w") as f:
+            f.write(FISH_SHORTCUTS)
+        Printer.success(f"Shortcuts written to {INIT_FILE_FISH}")
+    except Exception as e:
+        Printer.error(f"Failed: {e}")
+        return False
 
     if os.path.exists(config_path):
         with open(config_path, "r") as f:
-            if "gitfast shortcuts" in f.read():
-                Printer.warning("gitfast already in fish config — skipping")
+            if SOURCE_LINE in f.read():
+                Printer.warning("gitshorts already in config — skipping")
                 return True
 
     try:
         with open(config_path, "a") as f:
-            f.write(FISH_SHORTCUTS)
-        Printer.success(f"Shortcuts added to {config_path}")
+            f.write(f"\n# gitshorts\n{SOURCE_LINE}\n")
+        Printer.success(f"Added source line to {config_path}")
         return True
     except Exception as e:
-        Printer.error(f"Failed to write to {config_path}: {e}")
+        Printer.error(f"Failed: {e}")
         return False
 
 
@@ -297,23 +313,37 @@ def uninstall(config_path):
 
     try:
         with open(config_path, "r") as f:
-            content = f.read()
+            lines = f.readlines()
 
-        start = content.find("# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n# gitfast shortcuts")
-        end   = content.find("# end gitfast\n# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
-
-        if start == -1 or end == -1:
-            Printer.warning("gitfast block not found in fish config")
-            return False
-
-        cleaned = content[:start] + content[end + len("# end gitfast\n# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"):]
+        cleaned = [
+            l for l in lines
+            if "gitshorts" not in l
+            and SOURCE_LINE not in l
+        ]
 
         with open(config_path, "w") as f:
-            f.write(cleaned)
+            f.writelines(cleaned)
 
-        Printer.success("Removed from fish config")
+        if os.path.exists(INIT_FILE_FISH):
+            os.remove(INIT_FILE_FISH)
+
+        Printer.success(f"Removed from {config_path}")
         return True
 
     except Exception as e:
         Printer.error(f"Failed: {e}")
         return False
+
+
+def _detect_framework(config_path):
+    if not os.path.exists(config_path):
+        return None
+    try:
+        with open(config_path, "r") as f:
+            content = f.read()
+        if "oh-my-fish" in content:  return "oh-my-fish"
+        if "fisher"     in content:  return "fisher"
+        if "fundle"     in content:  return "fundle"
+    except Exception:
+        pass
+    return None

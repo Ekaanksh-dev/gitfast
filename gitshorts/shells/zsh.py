@@ -77,10 +77,30 @@ gcp() {
     echo "[..] Committing..."
     git commit -m "$msg" || { echo "[ERROR] Nothing to commit"; return 1; }
     echo "[..] Pushing to $branch..."
-    git push origin "$branch" || {
+    git push origin "$branch"
+    if [ $? -ne 0 ]; then
         echo "[WARN] Push failed — trying auto fix..."
-        git pull origin "$branch" && git push origin "$branch"
-    }
+        git pull origin "$branch"
+        if git diff --name-only --diff-filter=U 2>/dev/null | grep -q .; then
+            echo "[WARN] Conflicts after pull — running gmerge..."
+            gitshorts merge
+            if [ $? -ne 0 ]; then
+                echo "[ERROR] Auto merge failed — fix manually"
+                return 1
+            fi
+            git push origin "$branch"
+            if [ $? -ne 0 ]; then
+                echo "[ERROR] Push still failing"
+                return 1
+            fi
+        else
+            git push origin "$branch"
+            if [ $? -ne 0 ]; then
+                echo "[ERROR] Push failed — check remote"
+                return 1
+            fi
+        fi
+    fi
     echo "[OK] Done!"
 }
 

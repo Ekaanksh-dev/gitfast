@@ -86,7 +86,26 @@ function gcp {
     if ($LASTEXITCODE -ne 0) {
         Write-Host "[WARN] Push failed — trying auto fix..."
         git pull origin $branch
-        git push origin $branch
+        $conflicts = git diff --name-only --diff-filter=U 2>$null
+        if ($conflicts) {
+            Write-Host "[WARN] Conflicts after pull — running gmerge..."
+            gitshorts merge
+            if ($LASTEXITCODE -ne 0) {
+                Write-Host "[ERROR] Auto merge failed — fix manually"
+                return
+            }
+            git push origin $branch
+            if ($LASTEXITCODE -ne 0) {
+                Write-Host "[ERROR] Push still failing"
+                return
+            }
+        } else {
+            git push origin $branch
+            if ($LASTEXITCODE -ne 0) {
+                Write-Host "[ERROR] Push failed — check remote"
+                return
+            }
+        }
     }
     Write-Host "[OK] Done!"
 }

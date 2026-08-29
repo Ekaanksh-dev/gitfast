@@ -102,12 +102,31 @@ function gcp
         echo "[ERROR] Nothing to commit"
         return 1
     end
-    echo "[..] Pushing to "(git branch --show-current)"..."
+    echo "[..] Pushing..."
     git push origin (git branch --show-current)
     if test $status -ne 0
         echo "[WARN] Push failed — trying auto fix..."
         git pull origin (git branch --show-current)
-        git push origin (git branch --show-current)
+        set conflicts (git diff --name-only --diff-filter=U 2>/dev/null)
+        if test -n "$conflicts"
+            echo "[WARN] Conflicts after pull — running gmerge..."
+            gitshorts merge
+            if test $status -ne 0
+                echo "[ERROR] Auto merge failed — fix manually"
+                return 1
+            end
+            git push origin (git branch --show-current)
+            if test $status -ne 0
+                echo "[ERROR] Push still failing"
+                return 1
+            end
+        else
+            git push origin (git branch --show-current)
+            if test $status -ne 0
+                echo "[ERROR] Push failed — check remote"
+                return 1
+            end
+        end
     end
     echo "[OK] Done!"
 end

@@ -130,7 +130,7 @@ gclean()  { _gf_repo && git branch --merged | grep -v "\\*\\|main\\|master" | xa
 gremotes(){ _gf_repo && git remote -v }
 
 #TOKEN
-gtoken() { gitfast token "$1" }
+gtoken() { gitshorts token "$1" }
 
 # AUTH
 gtest_ssh() {
@@ -163,7 +163,7 @@ gtest_ssh() {
 }
 
 #SETUP
-gsetup()  { gitfast setup }
+gsetup()  { gitshorts setup }
 
 # MERGE
 gconflicts() { _gf_repo && git diff --name-only --diff-filter=U }

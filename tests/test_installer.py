@@ -3,7 +3,7 @@ import pytest
 
 def test_version():
     from gitshorts import __version__
-    assert __version__ == "1.0.4"
+    assert __version__ == "1.0.5"
 
 
 def test_banner():

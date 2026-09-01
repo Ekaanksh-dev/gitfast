@@ -6,7 +6,7 @@ from gitshorts.core.uninstaller import uninstall
 from gitshorts.core.updater import update, check_for_updates
 from gitshorts.token.manager import gtoken
 from gitshorts.core.setup_wizard import gsetup
-
+from gitshorts.config import gconfig
 
 def main():
     """Main CLI entry point — gitfast command"""
@@ -36,6 +36,13 @@ def main():
     elif cmd == "setup":
          gsetup()
 
+    elif cmd == "config":
+       action  = args[1] if len(args) > 1 else "show"
+       section = args[2] if len(args) > 2 else None
+       key     = args[3] if len(args) > 3 else None
+       value   = args[4] if len(args) > 4 else None
+       gconfig(action, section, key, value)
+
     elif cmd == "token":
         action = args[1] if len(args) > 1 else "info"
         gtoken(action)
@@ -43,7 +50,7 @@ def main():
     else:
         Printer.error(f"Unknown command: {cmd}")
         help_cmd()
-
+        print("  config       manage gitshorts configuration")
 
 def help_cmd():
     """Show all available commands"""

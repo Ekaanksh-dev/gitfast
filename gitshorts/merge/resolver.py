@@ -9,6 +9,21 @@ from gitshorts.merge.interactive import run_interactive
 
 
 def gmerge(strategy=Strategy.SMART, interactive=False, backup=True, dry_run=False):
+    from gitshorts.config import get
+
+    # load from config if not specified
+    if strategy is None:
+        strategy_name = get("merge", "strategy", "smart")
+        strategy = {
+            "smart":  Strategy.SMART,
+            "ours":   Strategy.OURS,
+            "theirs": Strategy.THEIRS,
+            "longer": Strategy.LONGER,
+        }.get(strategy_name, Strategy.SMART)
+
+    if backup is None:
+        backup = get("merge", "auto_backup", True)
+
     if not is_git_repo():
         Printer.error("Not a git repo")
         return False

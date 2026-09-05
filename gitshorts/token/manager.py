@@ -14,7 +14,7 @@ def gtoken_setup(host="github.com"):
     Full token setup in one command
     Ask → Validate → Store → Configure git
     """
-    Printer.header(f"gitfast — Token Setup ({host})")
+    Printer.header(f"gitshorts — Token Setup ({host})")
 
     # Step 1 — get token securely
     print("  Create token at:")

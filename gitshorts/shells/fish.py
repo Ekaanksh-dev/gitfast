@@ -8,7 +8,7 @@ SOURCE_LINE   = 'source ~/.gitshorts/init.fish'
 
 FISH_SHORTCUTS = '''
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# gitfast shortcuts
+# gitshorts shortcuts
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 # TIER 1 — daily
@@ -183,7 +183,7 @@ function gremotes; git remote -v; end
 
 # TOKEN
 function gtoken
-    gitfast token $argv[1]
+    gitshorts token $argv[1]
 end
 
 # AUTH
@@ -217,7 +217,7 @@ function gtest_ssh
 end
 
 function gsetup
-    gitfast setup
+    gitshorts setup
 end
 
 # MERGE
@@ -228,7 +228,7 @@ function gconflicts; git diff --name-only --diff-filter=U; end
 function ghelp
     echo ""
     echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    echo "  gitfast shortcuts"
+    echo "  gitshorts shortcuts"
     echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     echo ""
     echo "  TIER 1 — Daily"
@@ -297,7 +297,7 @@ function ghelp
 end
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# end gitfast
+# end gitshorts
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 '''
 

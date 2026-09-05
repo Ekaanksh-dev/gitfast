@@ -33,7 +33,7 @@ def gsetup():
     Main setup wizard
     Guides user through platform + auth setup
     """
-    Printer.header("gitfast — Setup Wizard")
+    Printer.header("gitshorts — Setup Wizard")
 
     # Step 1 — choose platforms
     platforms = _choose_platforms()
@@ -251,7 +251,7 @@ def _save_preferences(platforms, auth_method):
     import os
     import json
 
-    config_dir  = os.path.expanduser("~/.config/gitfast")
+    config_dir  = os.path.expanduser("~/.config/gitshorts")
     config_file = os.path.join(config_dir, "config.json")
 
     os.makedirs(config_dir, exist_ok=True)
@@ -296,7 +296,7 @@ def load_preferences():
     import os
     import json
 
-    config_file = os.path.expanduser("~/.config/gitfast/config.json")
+    config_file = os.path.expanduser("~/.config/gitshorts/config.json")
 
     if not os.path.exists(config_file):
         return None

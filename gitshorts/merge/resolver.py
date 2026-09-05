@@ -109,7 +109,7 @@ def _commit_resolved():
 
 def main():
     import argparse
-    parser = argparse.ArgumentParser(description="gitfast — auto merge conflict resolver")
+    parser = argparse.ArgumentParser(description="gitshorts — auto merge conflict resolver")
     parser.add_argument("-i", "--interactive", action="store_true")
     parser.add_argument("--ours",    action="store_true")
     parser.add_argument("--theirs",  action="store_true")

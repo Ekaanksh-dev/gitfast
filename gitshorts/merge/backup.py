@@ -11,7 +11,7 @@ def create_backup(filepath):
         return None
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    backup_path = f"{filepath}.gitfast_backup_{timestamp}"
+    backup_path = f"{filepath}.gitshorts_backup_{timestamp}"
 
     try:
         shutil.copy2(filepath, backup_path)
@@ -58,18 +58,18 @@ def delete_backup(backup_path):
 
 
 def list_backups(directory="."):
-    """List all gitfast backup files"""
+    """List all gitshorts backup files"""
     backups = []
 
     for root, dirs, files in os.walk(directory):
         for f in files:
-            if ".gitfast_backup_" in f:
+            if ".gitshorts_backup_" in f:
                 backups.append(os.path.join(root, f))
 
     if not backups:
         Printer.info("No backups found")
     else:
-        Printer.header("gitfast Backups")
+        Printer.header("gitshorts Backups")
         for b in backups:
             print(f"  {b}")
         Printer.divider()
@@ -98,7 +98,7 @@ def cleanup_backups(directory="."):
 
 def _get_original_path(backup_path):
     """Extract original filepath from backup path"""
-    marker = ".gitfast_backup_"
+    marker = ".gitshorts_backup_"
     idx = backup_path.find(marker)
     if idx == -1:
         return None

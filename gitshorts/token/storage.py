@@ -127,7 +127,7 @@ class TokenStorage:
         try:
             proc = subprocess.Popen(
                 ["secret-tool", "store",
-                 "--label", f"gitfast:{host}",
+                 "--label", f"gitshorts:{host}",
                  "host", host,
                  "user", username],
                 stdin=subprocess.PIPE

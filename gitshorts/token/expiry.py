@@ -103,7 +103,7 @@ def format_expiry_display(expiry_str):
 def should_warn(expiry_str):
     """
     Return True if we should warn user about expiry
-    Called every time gitfast runs
+    Called every time gitshorts runs
     """
     days = days_until_expiry(expiry_str)
 
@@ -115,7 +115,7 @@ def should_warn(expiry_str):
 
 def auto_check_on_startup(token_info):
     """
-    Run expiry check on every gitfast startup
+    Run expiry check on every gitshorts startup
     Warns user silently if expiring soon
     """
     if not token_info:

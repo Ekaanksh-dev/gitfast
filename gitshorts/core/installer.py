@@ -8,9 +8,9 @@ from gitshorts.shells import bash, zsh, fish, powershell
 def install():
     """
     Main installer — detects system and injects shortcuts
-    Called when user runs: pip install gitfast
+    Called when user runs: pip install gitshorts
     """
-    Printer.header("gitfast Installer")
+    Printer.header("gitshorts Installer")
 
     # Step 1 — detect system
     info = detect()
@@ -50,7 +50,7 @@ def install():
 def _print_success(info):
     """Print success message after install"""
     Printer.divider()
-    print(f"  [OK] gitfast installed for {info.shell}")
+    print(f"  [OK] gitshorts installed for {info.shell}")
     print(f"  [OK] Config: {info.config}")
     print("")
     print("  Next steps:")
@@ -71,13 +71,13 @@ def _print_failure(info):
     print("  Manual install:")
     print(f"  Add this to {info.config}:")
     print("")
-    print("  source $(python3 -c 'import gitshorts; print(gitfast.__file__)')")
+    print("  source $(python3 -c 'import gitshorts; print(gitshorts.__file__)')")
     Printer.divider()
 
 
 def install_all_shells():
     """Install for ALL shells at once"""
-    Printer.header("gitfast — Install All Shells")
+    Printer.header("gitshorts — Install All Shells")
 
     home    = os.path.expanduser("~")
     results = {}

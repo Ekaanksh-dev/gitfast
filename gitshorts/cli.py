@@ -9,7 +9,7 @@ from gitshorts.core.setup_wizard import gsetup
 from gitshorts.config import gconfig
 
 def main():
-    """Main CLI entry point — gitfast command"""
+    """Main CLI entry point — gitshorts command"""
     args = sys.argv[1:]
 
     if not args:
@@ -31,7 +31,7 @@ def main():
         check_for_updates()
 
     elif cmd == "version":
-        print(f"gitfast v{__version__}")
+        print(f"gitshorts v{__version__}")
 
     elif cmd == "setup":
          gsetup()
@@ -54,12 +54,12 @@ def main():
 
 def help_cmd():
     """Show all available commands"""
-    Printer.header(f"gitfast v{__version__}")
-    print("  USAGE: gitfast <command>")
+    Printer.header(f"gitshorts v{__version__}")
+    print("  USAGE: gitshorts <command>")
     print("")
     print("  COMMANDS:")
     print("  install      install shortcuts into your shell")
-    print("  uninstall    remove gitfast from all shells")
+    print("  uninstall    remove gitshorts from all shells")
     print("  update       update to latest version")
     print("  check        check if update available")
     print("  version      show current version")

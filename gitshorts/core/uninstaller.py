@@ -5,12 +5,12 @@ from gitshorts.shells import bash, zsh, fish, powershell
 
 def uninstall():
     """
-    Remove gitfast from all shells
-    Called when user runs: gitfast uninstall
+    Remove gitshorts from all shells
+    Called when user runs: gitshorts uninstall
     """
-    Printer.header("gitfast Uninstaller")
+    Printer.header("gitshorts Uninstaller")
 
-    confirm = input("  Remove gitfast from all shells? (y/N): ").strip().lower()
+    confirm = input("  Remove gitshorts from all shells? (y/N): ").strip().lower()
     if confirm != "y":
         Printer.info("Cancelled")
         return False
@@ -53,10 +53,10 @@ def uninstall():
         print(f"  {status} removed from {shell_name}")
 
     print("")
-    Printer.success("gitfast uninstalled")
+    Printer.success("gitshorts uninstalled")
     print("")
     print("  To fully remove:")
-    print("  pip uninstall gitfast")
+    print("  pip uninstall gitshorts")
     Printer.divider()
 
     return True
@@ -78,7 +78,7 @@ def _remove_token():
 
 
 def _remove_backups():
-    """Remove all gitfast backup files"""
+    """Remove all gitshorts backup files"""
     try:
         from gitshorts.merge.backup import cleanup_backups
         cleanup_backups()

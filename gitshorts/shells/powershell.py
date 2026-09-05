@@ -8,7 +8,7 @@ SOURCE_LINE    = '. ~/.gitshorts/init.ps1'
 
 POWERSHELL_SHORTCUTS = '''
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# gitfast shortcuts
+# gitshorts shortcuts
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 # helper
@@ -159,7 +159,7 @@ function gclean  { git branch --merged | Where-Object { $_ -notmatch "main|maste
 function gremotes{ git remote -v }
 
 #TOKEN
-function gtoken { gitfast token $args[0] }
+function gtoken { gitshorts token $args[0] }
 
 # AUTH
 function gtest_ssh {
@@ -183,7 +183,7 @@ function gtest_ssh {
 }
 
 #SETUP
-function gsetup { gitfast setup }
+function gsetup { gitshorts setup }
 
 
 # MERGE
@@ -194,7 +194,7 @@ function gconflicts { git diff --name-only --diff-filter=U }
 function ghelp {
     Write-Host ""
     Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    Write-Host "  gitfast shortcuts"
+    Write-Host "  gitshorts shortcuts"
     Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     Write-Host "  TIER 1 — Daily"
     Write-Host "  gs            show what changed"
@@ -261,7 +261,7 @@ function ghelp {
 }
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# end gitfast
+# end gitshorts
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 '''
 

@@ -5,7 +5,7 @@ from gitshorts import __version__
 from gitshorts.utils.colors import Printer
 
 
-PYPI_URL = "https://pypi.org/pypi/gitfast/json"
+PYPI_URL = "https://pypi.org/pypi/gitshorts/json"
 
 
 def get_latest_version():
@@ -13,7 +13,7 @@ def get_latest_version():
     try:
         req = urllib.request.Request(
             PYPI_URL,
-            headers={"User-Agent": "gitfast"}
+            headers={"User-Agent":    "gitshorts"}
         )
         with urllib.request.urlopen(req, timeout=10) as response:
             data = json.loads(response.read().decode())
@@ -42,8 +42,8 @@ def check_for_updates():
     if available:
         Printer.warning(f"Update available: v{__version__} → v{latest}")
         print("")
-        print("  Run: gitfast update")
-        print("  Or:  pip install --upgrade gitfast")
+        print("  Run: gitshorts update")
+        print("  Or:  pip install --upgrade gitshorts")
         print("")
         return True
 
@@ -52,8 +52,8 @@ def check_for_updates():
 
 
 def update():
-    """Update gitfast to latest version"""
-    Printer.header("gitfast Updater")
+    """Update gitshorts to latest version"""
+    Printer.header("gitshorts Updater")
 
     # check if update available
     available, latest = is_update_available()
@@ -66,7 +66,7 @@ def update():
 
     try:
         result = subprocess.run(
-            ["pip", "install", "--upgrade", "gitfast"],
+            ["pip", "install", "--upgrade", "gitshorts"],
             capture_output=True,
             text=True
         )
@@ -81,7 +81,7 @@ def update():
             Printer.error(f"Update failed: {result.stderr}")
             print("")
             print("  Try manually:")
-            print("  pip install --upgrade gitfast")
+            print("  pip install --upgrade gitshorts")
             return False
 
     except Exception as e:
@@ -99,7 +99,7 @@ def auto_check_on_startup():
         if available:
             print("")
             Printer.warning(
-                f"gitfast v{latest} available — run: gitfast update"
+                f"gitshorts v{latest} available — run: gitshorts update"
             )
             print("")
     except Exception:

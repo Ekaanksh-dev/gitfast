@@ -38,7 +38,7 @@ def validate_github(token):
             headers={
                 "Authorization": f"token {token}",
                 "Accept":        "application/vnd.github.v3+json",
-                "User-Agent":    "gitfast"
+                "User-Agent":    "gitshorts"
             }
         )
 
@@ -85,7 +85,7 @@ def validate_gitlab(token):
             f"{GITLAB_API}/user",
             headers={
                 "PRIVATE-TOKEN": token,
-                "User-Agent":    "gitfast"
+                "User-Agent":    "gitshorts"
             }
         )
 
@@ -116,7 +116,7 @@ def validate_bitbucket(token):
             f"{BITBUCKET_API}/user",
             headers={
                 "Authorization": f"Bearer {token}",
-                "User-Agent":    "gitfast"
+                "User-Agent":    "gitshorts"
             }
         )
 

@@ -8,7 +8,7 @@ SOURCE_LINE   = '[ -f ~/.gitshorts/init.sh ] && source ~/.gitshorts/init.sh'
 
 ZSH_SHORTCUTS = '''
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# gitfast shortcuts
+# gitshorts shortcuts
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 # helper
@@ -193,7 +193,7 @@ gconflicts() { _gf_repo && git diff --name-only --diff-filter=U }
 ghelp() {
         echo ""
     echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    echo "  gitfast shortcuts"
+    echo "  gitshorts shortcuts"
     echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     echo ""
     echo "  TIER 1 — Daily"
@@ -262,7 +262,7 @@ ghelp() {
 }
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# end gitfast
+# end gitshorts
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 '''
 

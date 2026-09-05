@@ -221,6 +221,7 @@ function gsetup
 end
 
 # MERGE
+function gconfig; gitshorts config $argv; end
 function gconflicts; git diff --name-only --diff-filter=U; end
 
 # HELP
@@ -278,6 +279,12 @@ function ghelp
     echo "  gtoken refresh  update expired token"
     echo "  gtoken revoke   remove token"
     echo "  gtoken info     show token status"
+    echo ""
+    echo "  CONFIG"
+    echo "  gconfig             show all settings"
+    echo "  gconfig set merge strategy ours"
+    echo "  gconfig set output verbose true"
+    echo "  gconfig reset       reset to defaults"
     echo ""
     echo "  MERGE"
     echo "  gconflicts      list all conflicts"

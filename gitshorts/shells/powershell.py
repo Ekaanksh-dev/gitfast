@@ -187,6 +187,7 @@ function gsetup { gitfast setup }
 
 
 # MERGE
+function gconfig { gitshorts config $args }
 function gconflicts { git diff --name-only --diff-filter=U }
 
 # HELP
@@ -243,6 +244,11 @@ function ghelp {
     Write-Host "  gtoken test     verify token works"
     Write-Host "  gtoken revoke   remove token"
     Write-Host "  gtoken info     show token status"
+    Write-Host ""
+    Write-Host "  CONFIG"
+    Write-Host "  gconfig             show all settings"
+    Write-Host "  gconfig set merge strategy ours"
+    Write-Host "  gconfig reset       reset to defaults"
     Write-Host ""
     Write-Host "  MERGE"
     Write-Host "  gconflicts      list all conflicts"

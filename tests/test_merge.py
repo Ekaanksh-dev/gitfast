@@ -198,7 +198,7 @@ def test_backup_create():
     backup = create_backup(path)
     assert backup is not None
     assert os.path.exists(backup)
-    assert "gitfast_backup" in backup
+    assert "gitshorts_backup" in backup
     delete_backup(backup)
     os.unlink(path)
 

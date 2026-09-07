@@ -183,8 +183,13 @@ gtest_ssh() {
 #SETUP
 gsetup()  { gitshorts setup; }
 
-# MERGE
+#CONFIG
 gconfig() { gitshorts config "$@"; }
+
+#HOOKS
+ghooks()  { gitshorts hooks "$@"; }
+
+# MERGE
 gconflicts() { _gf_repo && git diff --name-only --diff-filter=U; }
 
 
@@ -249,6 +254,11 @@ ghelp() {
     echo "  gconfig set merge strategy ours"
     echo "  gconfig set output verbose true"
     echo "  gconfig reset       reset to defaults"
+    echo ""
+    echo "  HOOKS"
+    echo "  ghooks              list hook status"
+    echo "  ghooks install      install all hooks"
+    echo "  ghooks uninstall    remove all hooks"
     echo ""
     echo "  MERGE"
     echo "  gconflicts      list all conflicts"

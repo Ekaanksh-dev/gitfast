@@ -218,10 +218,15 @@ end
 
 function gsetup
     gitshorts setup
-end
+end 
+
+#CONFIG
+function gconfig; gitshorts config $argv; end
+
+#HOOKS
+function ghooks;  gitshorts hooks $argv; end
 
 # MERGE
-function gconfig; gitshorts config $argv; end
 function gconflicts; git diff --name-only --diff-filter=U; end
 
 # HELP
@@ -285,6 +290,11 @@ function ghelp
     echo "  gconfig set merge strategy ours"
     echo "  gconfig set output verbose true"
     echo "  gconfig reset       reset to defaults"
+    echo ""
+    echo "  HOOKS"
+    echo "  ghooks              list hook status"
+    echo "  ghooks install      install all hooks"
+    echo "  ghooks uninstall    remove all hooks"
     echo ""
     echo "  MERGE"
     echo "  gconflicts      list all conflicts"
